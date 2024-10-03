@@ -85,6 +85,12 @@ class HandleComponents extends Mechanism
 
     public function update($snapshot, $updates, $calls)
     {
+        if(!is_array($snapshot)){
+            if (! in_array(array(['data', 'memo']), array_keys($snapshot))) {
+                throw new MalformedParamException('$snapshot');
+            }
+        }
+        
         $data = $snapshot['data'];
         $memo = $snapshot['memo'];
 
